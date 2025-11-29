@@ -11,10 +11,6 @@
     <Version>0.1.0</Version>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Patches\" />
-  </ItemGroup>
-
   <!--
   How to include thunderstore mods as dependencies via nuget
 
