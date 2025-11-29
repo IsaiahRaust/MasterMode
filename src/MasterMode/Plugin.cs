@@ -1,5 +1,7 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
+using HarmonyLib;
+using System.Reflection;
 
 namespace MasterMode;
 
@@ -16,6 +18,7 @@ namespace MasterMode;
 public partial class Plugin : BaseUnityPlugin
 {
     internal static ManualLogSource Log { get; private set; } = null!;
+    private readonly Harmony _harmony = new(Id);
 
     private void Awake()
     {
@@ -31,5 +34,8 @@ public partial class Plugin : BaseUnityPlugin
 
         // Log our awake here so we can see it in LogOutput.log file
         Log.LogInfo($"Plugin {Name} is loaded!");
+        //Assembly method works to scan the entire plugin file and every .cs files in hte built DLL
+        // PatchALL makes it run all HarmonyPatch attributes in the assembly and injects them into the game
+        _harmony.PatchAll(Assembly.GetExecutingAssembly());
     }
 }
