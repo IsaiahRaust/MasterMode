@@ -13,39 +13,11 @@ namespace MasterMode.Patches
     internal class EnergyDrinkPatch
     {
 
-        private static bool boostLocked = false;
-
         [HarmonyPatch(nameof(Affliction_FasterBoi.UpdateEffect))]
         [HarmonyPrefix]
         private static void EnergydrinkPatch(Affliction_FasterBoi __instance)
         {
 
-
-            var character = __instance.character;
-
-
-            if (character == null)
-                return;
-
-            if (!character.IsLocal)
-                return;
-
-
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                boostLocked = !boostLocked;
-            }
-
-
-            if (boostLocked)
-            {
-                __instance.totalTime = float.MaxValue;
-            }
-            else
-            {
-                __instance.totalTime = 0f;
-
-            }
 
 
         }
